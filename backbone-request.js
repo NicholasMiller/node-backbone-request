@@ -52,7 +52,7 @@ backboneRequest.sync = function(method, model, options) {
   _.extend(params, options);
 
   request({ url: params.url, json: true, method: params.type, headers: params.headers }, function (err, result, body) {
-    if (err) {
+    if(err || result.statusCode >= 400) {
       return options.error(err);
     }
     return options.success(body);
